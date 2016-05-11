@@ -39,7 +39,7 @@
                                 <MenuFlyoutItem Text="删除"/>
                             </MenuFlyout>
                         </FlyoutBase.AttachedFlyout>-->
-                        <TextBlock Name="allDisplay"  Text="{Binding St}">
+                        <TextBlock Name="allDisplay"  Text="{Binding St,Mode=OneWay}">
                         </TextBlock>
                     <!--</StackPanel>-->
                 </DataTemplate>

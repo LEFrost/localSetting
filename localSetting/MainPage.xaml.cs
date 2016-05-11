@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,7 +26,7 @@ namespace localSetting
     public sealed partial class MainPage : Page
     {
         ApplicationDataContainer localSetting;
-        List<items> mySetting = new List<items>();
+        ObservableCollection<items> mySetting = new ObservableCollection<items>();
         public MainPage()
         {
             localSetting = ApplicationData.Current.LocalSettings;
@@ -102,8 +103,15 @@ namespace localSetting
         {
             if (!String.IsNullOrEmpty(update_key.Text))
             {
-                localSetting.Values.Remove(update_key.Text);
-                BindLlist();
+                if (localSetting.Values.ContainsKey(update_key.Text))
+                {
+                    localSetting.Values.Remove(update_key.Text);
+                    BindLlist();
+                }
+           else
+                {
+                    await new MessageDialog("无此key").ShowAsync();
+                }
             }
             else
             {
